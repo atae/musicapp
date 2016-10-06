@@ -1,0 +1,29 @@
+<h1>Add a Track</h1>
+
+<form action=" <%= tracks_url %> " method="post">
+  <%= auth_token %>
+  <label for="GET-Title">Title:</label>
+  <input type="text" name="track[title]" value="">
+  <br>
+  <label for="GET-album">Album:</label>
+  <select name="track[album_id]">
+    <option disabled> Select an Album </option>
+    <% @album.related_albums.each do |album| %>
+      <% if @album == album %>
+        <option selected value="<%= album.id %>"> <%= "#{album.title}" %></option>
+      <% else %>
+        <option value="<%= album.id %>"> <%= "#{album.title}" %></option>
+      <% end %>
+    <% end %>
+  </select>
+  <br>
+  <label for="GET-bonus?">Bonus Track?</label>
+  <label for="bonus-true">True</label>
+  <input type="radio" name="track[bonus?]" id = "bonus-true" value="true">
+  <label for="bonus-false">False</label>
+  <input type="radio" name="track[bonus?]" id = "bonus-false" value="false">
+  <br>
+  <textarea name="track[lyrics]" rows="20" cols="60">Enter Lyrics Here</textarea>
+  <br>
+  <button>Add Track</button>
+</form>

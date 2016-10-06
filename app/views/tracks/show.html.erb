@@ -1,0 +1,31 @@
+<h1> <%= @track.title %> </h1>
+
+<table>
+  <tr>
+    <td>
+    <strong>Album:</strong>
+    </td>
+    <td>
+    <%= link_to "#{@track.album.title}", album_url(@track.album), method: :get %>
+    </td>
+  </tr>
+
+  <% if @track.bonus? == 'true' %>
+  <tr>
+    <td>
+      <strong> Bonus Track </strong>
+    </td>
+  </tr>
+  <% end %>
+
+</table>
+<br>
+<strong> Lyrics </strong>
+<p><%= @track.lyrics %></p>
+<br>
+
+<%= button_to "Edit Track", edit_track_url(@track), method: :get %>
+<%= button_to "Delete Track", track_url(@track), method: :delete %>
+
+<br>
+<%= link_to "Return to #{@track.album.title}", album_url(@track.album), method: :get %>

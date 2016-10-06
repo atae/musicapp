@@ -11,4 +11,8 @@ class Album < ActiveRecord::Base
   foreign_key: :album_id,
   class_name: :Track,
   dependent: :destroy
+
+  has_many :related_albums,
+  through: :band,
+  source: :albums
 end

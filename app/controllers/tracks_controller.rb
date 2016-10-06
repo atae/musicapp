@@ -1,11 +1,12 @@
 class TracksController < ApplicationController
   #creation pair
   def new
+    @album = Album.find(params[:album_id])
     render :new
   end
 
   def create
-    new_track = Track.new(track_params)
+    new_track = Track.new(tracks_params)
     if new_track.valid?
       new_track.save
       redirect_to track_url(new_track)
@@ -17,11 +18,12 @@ class TracksController < ApplicationController
 
   #editing pair
   def edit
+    @track = Track.find(params[:id])
     render :edit
   end
 
   def update
-    track = @track.find(params[:id])
+    track = Track.find(params[:id])
     if track.nil?
       flash.now[:errors] = ['Track not found']
       render :edit
@@ -30,7 +32,7 @@ class TracksController < ApplicationController
 
     pending_track = Track.new(tracks_params)
     if track.valid?
-      track.update!(track_params)
+      track.update!(tracks_params)
       flash[:errors] = ["Track updated!"]
       redirect_to track_url(track)
     else
@@ -42,12 +44,14 @@ class TracksController < ApplicationController
 
   #show and delete pair
   def show
+    @track = Track.find(params[:id])
     render :show
   end
 
   def destroy
+    album = Track.find(params[:id]).album
     Track.destroy(params[:id])
-    redirect_to track_url(track)
+    redirect_to album_url(album)
   end
 
   private
