@@ -5,6 +5,14 @@ class TracksController < ApplicationController
   end
 
   def create
+    new_track = Track.new(track_params)
+    if new_track.valid?
+      new_track.save
+      redirect_to track_url(new_track)
+    else
+      flash[:error] = new_track.errors.full_messages
+      render :new
+    end
   end
 
   #editing pair
@@ -13,6 +21,23 @@ class TracksController < ApplicationController
   end
 
   def update
+    track = @track.find(params[:id])
+    if track.nil?
+      flash.now[:errors] = ['Track not found']
+      render :edit
+      return nil
+    end
+
+    pending_track = Track.new(tracks_params)
+    if track.valid?
+      track.update!(track_params)
+      flash[:errors] = ["Track updated!"]
+      redirect_to track_url(track)
+    else
+      flash.now[:errors] = pending_track.errors.full_messages
+      render :edit
+    end
+
   end
 
   #show and delete pair
@@ -21,6 +46,8 @@ class TracksController < ApplicationController
   end
 
   def destroy
+    Track.destroy(params[:id])
+    redirect_to track_url(track)
   end
 
   private

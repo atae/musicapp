@@ -18,18 +18,38 @@ class AlbumsController < ApplicationController
 
   #editing pair
   def edit
+    @album = Album.find(params[:id])
     render :edit
   end
 
   def update
+    album = Album.find(params[:id])
+    if album.nil?
+      flash.now[:errors] = ['Band not found']
+      render :edit
+      return nil
+    end
+
+    pending_album = Album.new(album_params)
+    if album.valid?
+      album.update!(album_params)
+      redirect_to album_url(album)
+    else
+      flash[:errors] = pending_album.errors.full_messages
+      render :edit
+    end
   end
 
   #show and delete pair
   def show
+    @album = Album.find(params[:id])
     render :show
   end
 
   def destroy
+    band = Album.find(params[:id]).band
+    Album.destroy(params[:id])
+    redirect_to band_url(band)
   end
 
   private

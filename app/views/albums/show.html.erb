@@ -1,0 +1,28 @@
+<h1> <%= @album.title %> </h2>
+
+<ul>
+  <li> Band: <%= link_to "#{@album.band.name}", band_url(@album.band), method: :get %> </li>
+  <% if @album.live? == 'Live' %>
+    <li> Live Album </li>
+  <% else %>
+    <li> Studio Album </li>
+  <% end %>
+</ul>
+
+
+<ol>
+  <strong> Tracks </strong>
+ <% @album.tracks.each do |track| %>
+  <li><%= link_to "track.title", track_url(track), method: :get %></li>
+  <% end %>
+</ol>
+
+<br>
+<%= button_to "Add a track", new_track_url, method: :get %>
+<br>
+<%= button_to "Edit Album", edit_album_url, method: :get %>
+<%= button_to "Delete Album", album_url, method: :delete %>
+<br>
+<%= link_to "Return to #{@album.band.name}", band_url(@album.band), method: :get %>
+<br>
+<%= link_to "Return to Bands List", bands_url, method: :get %>

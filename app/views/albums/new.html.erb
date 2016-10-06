@@ -1,0 +1,24 @@
+<h1> Add an Album </h1>
+
+<form class="" action=" <%= albums_url %>" method="post">
+<%= auth_token %>
+  <label for="GET-title">Title:</label>
+  <input type="text" name="album[title]" value="">
+  <br>
+  <label for="GET-band">Band:</label>
+  <select name="album[band_id]">
+    <option disabled selected> Select a Band </option>
+    <% Band.all.each do |band| %>
+    <option value="<%= band.id %>"><%= band.name %></option>
+    <% end %>
+  </select>
+  <br>
+  <label for="GET-live">Recording Style:</label>
+    <input type="radio" name="album[live?]" id="Live" value="Live">
+    <label for="Live"> Live </label>
+    <input type="radio" name="album[live?]" id="Studio" value="Studio">
+    <label for="Studio"> Studio </label>
+  <br>
+  <button>Add Album</button>
+
+</form>
