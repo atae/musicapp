@@ -1,6 +1,8 @@
 class AlbumsController < ApplicationController
   #creation pair
   def new
+    @band = Band.find(params[:band_id])
+    @band ||= Band.new
     render :new
   end
 

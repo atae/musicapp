@@ -9,7 +9,11 @@
   <select name="album[band_id]">
     <option disabled selected> Select a Band </option>
     <% Band.all.each do |band| %>
+    <% if @band.id == band.id %>
+    <option value="<%= band.id %>" selected><%= band.name %></option>
+    <% else %>
     <option value="<%= band.id %>"><%= band.name %></option>
+    <% end %>
     <% end %>
   </select>
   <br>

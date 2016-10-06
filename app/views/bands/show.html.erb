@@ -3,7 +3,6 @@
 <!-- edit and delete buttons -->
 
 <h1> <%= @band.name %> </h1>
-
 <table>
   <tr>
     <th> Albums </th>
@@ -17,7 +16,10 @@
   <% end %>
 </table>
 <br>
-<%= button_to "Add an Album", new_album_url, method: :get %>
+<form class="" action=" <%= new_album_url  %>" method="get">
+  <input type="hidden" name="band_id" value=" <%= @band.id %>">
+  <button>Add An Album</button>
+</form>
 
 <br>
 <%= button_to "Edit Band", edit_band_url(@band), method: :get %>
