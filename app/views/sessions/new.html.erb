@@ -1,0 +1,12 @@
+<h1> Sign in! </h1>
+
+<form action="<%= sessions_url %> " method="post">
+  <%= auth_token %>
+  <label for="GET-email">Email:</label>
+  <input type="text" name="user[email]" value="" id = 'GET-email'>
+
+  <label for="GET-password">Password:</label>
+  <input type="text" name="user[password]" value="" id = 'GET-password'>
+
+  <button>Log In</button>
+</form>

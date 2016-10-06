@@ -1,0 +1,13 @@
+<h1> Create User </h1>
+
+<form action="<%= users_url %> " method="post">
+  <%= auth_token %>
+
+  <label for="GET-email">Email:</label>
+  <input type="text" name="user[email]" value="" id = 'GET-email'>
+
+  <label for="GET-password">Password:</label>
+  <input type="text" name="user[password]" value="" id = 'GET-password'>
+
+  <button>Create Account</button>
+</form>
