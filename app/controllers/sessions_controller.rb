@@ -1,11 +1,17 @@
 class SessionsController < ApplicationController
   #login page
   def new
+    if logged_in?
+      redirect_to bands_url
+      return nil
+    end
     render :new
   end
 
   #log in
   def create
+
+
     user = User.find_by_credentials(
       session_params[:email],
       session_params[:password]
@@ -14,10 +20,10 @@ class SessionsController < ApplicationController
       render :new
       return nil
     end
-    
+
     if user.valid?
       login!(user)
-      redirect_to user_url(user)
+      redirect_to bands_url
     else
       flash[:errors] = ["Incorrect Email or Password"]
       redirect_to :new

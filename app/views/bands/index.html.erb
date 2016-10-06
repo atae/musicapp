@@ -1,0 +1,15 @@
+<h1> Welcome to MusicApp! </h1>
+
+<h2><strong> Bands </strong></h2>
+
+<ul>
+
+  <% @bands.each do |band| %>
+    <li>
+      <%= link_to "#{band.name}", band_url(band.id), method: :get %>
+    </li>
+  <% end %>
+</ul>
+
+<br>
+<%= link_to "Add a band", new_band_url, method: :get %>

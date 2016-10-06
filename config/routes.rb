@@ -56,4 +56,7 @@ Rails.application.routes.draw do
   root to: 'sessions#new'
   resources :users, only: [:create, :new, :show]
   resources :sessions, only: [:create, :new, :destroy]
+  resources :bands
+  resources :albums, except: [:index]
+  resources :tracks, except: [:index]
 end
