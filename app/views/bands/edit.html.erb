@@ -1,4 +1,12 @@
 <h1> Edit Band </h1>
+<% if @band.errors.full_messages %>
+  <% @band.errors.full_messages.each do |error_msg| %>
+    <div>
+      <%= error_msg %>
+    </div>
+  <% end %>
+<% end %>
+
 <form class="" action=" <%= band_url %> " method="post">
   <%= auth_token %>
   <input type="hidden" name=_method value="patch">

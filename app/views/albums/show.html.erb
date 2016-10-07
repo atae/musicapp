@@ -1,5 +1,13 @@
 <h1> <%= @album.title %> </h2>
 
+  <% if @album.errors.full_messages %>
+    <% @album.errors.full_messages.each do |error_msg| %>
+      <div>
+        <%= error_msg %>
+      </div>
+    <% end %>
+  <% end %>
+
 <ul>
   <li> Band: <%= link_to "#{@album.band.name}", band_url(@album.band), method: :get %> </li>
   <% if @album.live? == 'Live' %>

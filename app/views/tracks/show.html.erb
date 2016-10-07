@@ -1,5 +1,13 @@
 <h1> <%= @track.title %> </h1>
 
+<% if @track.errors.full_messages %>
+  <% @track.errors.full_messages.each do |error_msg| %>
+    <div>
+      <%= error_msg %>
+    </div>
+  <% end %>
+<% end %>
+
 <table>
   <tr>
     <td>
@@ -21,7 +29,11 @@
 </table>
 <br>
 <strong> Lyrics </strong>
-<p><%= @track.lyrics %></p>
+<% if @track.lyrics %>
+<p><%= ugly_lyrics(@track.lyrics) %></p>
+<% else %>
+<p> This song is either an instrumental or no lyrics have been posted yet! </p>
+<% end %>
 <br>
 
 <%= button_to "Edit Track", edit_track_url(@track), method: :get %>
@@ -29,3 +41,8 @@
 
 <br>
 <%= link_to "Return to #{@track.album.title}", album_url(@track.album), method: :get %>
+
+
+<%= render 'note', track: @track %>
+
+<%= render 'form', track: @track %>

@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :redirect_logged_out
+
   #creation pair
   def new
     @album = Album.find(params[:album_id])

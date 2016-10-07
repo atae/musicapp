@@ -1,0 +1,16 @@
+<ul>
+  <% @track.notes.each do |note| %>
+    <li> <%= note.author.email %> says:
+    <br>
+    <br>
+
+    <%= note.note %>
+    <% if current_user == note.author %>
+    <form class="" action= "<%= "#{note_url}" %>" method="post">
+      <input type="hidden" name="delete_note[id]" value="<%=note.id %>">
+    <%= button_to "Delete Note", note_url, method: :delete %>
+    </form>
+    <% end %>
+  </li>
+  <% end %>
+</ul>

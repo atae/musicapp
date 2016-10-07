@@ -2,6 +2,14 @@
 <!-- show band albums -->
 <!-- edit and delete buttons -->
 
+<% if @band.errors.full_messages %>
+  <% @band.errors.full_messages.each do |error_msg| %>
+    <div>
+      <%= error_msg %>
+    </div>
+  <% end %>
+<% end %>
+
 <h1> <%= @band.name %> </h1>
 <table>
   <tr>

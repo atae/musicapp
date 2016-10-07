@@ -1,4 +1,5 @@
 class BandsController < ApplicationController
+  before_action :redirect_logged_out
   #show all bands
   def index
     @bands = Band.all

@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :redirect_logged_out
+
   #creation pair
   def new
     @band = Band.find(params[:band_id])
@@ -50,8 +52,12 @@ class AlbumsController < ApplicationController
 
   def destroy
     band = Album.find(params[:id]).band
-    Album.destroy(params[:id])
-    redirect_to band_url(band)
+    if Album.destroy(params[:id])
+      redirect_to band_url(band)
+    else
+      flash[:errors] = ['Cannot find album']
+      redirect_to band_url(band)
+    end
   end
 
   private

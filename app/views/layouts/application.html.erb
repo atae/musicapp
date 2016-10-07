@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <navbar bgcolor="#0000FF">
   <% if logged_in? %>
     <%= current_user.email %>
     <%= button_to "Logout", session_url(current_user.id), method: :delete %>
@@ -12,12 +13,13 @@
     <%= button_to "Create Account", new_user_url, method: :get %>
     <%= button_to "Log In", new_session_url, method: :get %>
   <% end %>
+  </navbar>
 </head>
 <body>
   <% if flash[:errors] %>
   <ul>
     <% flash[:errors].each do |error_msg| %>
-      <li> <%=error_msg%></li>
+      <div color="color:#0000FF"> <%=error_msg%></div>
     <% end %>
 
   </ul>
@@ -27,6 +29,7 @@
 
 </body>
 <footer>
+  <br>
   <br>
   <%= link_to "Return to Bands List", bands_url, method: :get %>
 </footer>
