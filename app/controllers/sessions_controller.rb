@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
   #log in
   def create
 
-
     user = User.find_by_credentials(
       session_params[:email],
       session_params[:password]
@@ -19,14 +18,15 @@ class SessionsController < ApplicationController
     if user.nil?
       render :new
       return nil
-    end
-
-    if user.valid?
+    elsif user.activated == false
+      flash[:errors] = ["User found but not activated. Please activate your account in the email that was sent to your inbox."]
+      redirect_to new_session_url
+    elsif user.valid?
       login!(user)
       redirect_to bands_url
     else
       flash[:errors] = ["Incorrect Email or Password"]
-      redirect_to :new
+      redirect_to new_session_url
     end
   end
 
@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
   def destroy
     user = current_user
     logout!(user)
-    render :new
+    redirect_to new_session_url
   end
 
   private

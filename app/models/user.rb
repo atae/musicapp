@@ -13,6 +13,11 @@ class User < ActiveRecord::Base
     @user.is_password?(password) ? @user : nil
   end
 
+  def generate_activation_token!
+    self.activation_token = SecureRandom::urlsafe_base64
+    self.save!
+  end
+
   def generate_session_token
     SecureRandom.urlsafe_base64
   end

@@ -1,4 +1,11 @@
 <h1>Edit a Track</h1>
+<% if @track.errors.full_messages %>
+  <% @track.errors.full_messages.each do |error_msg| %>
+    <div>
+      <%= error_msg %>
+    </div>
+  <% end %>
+<% end %>
 
 <form action=" <%= track_url(@track.id) %> " method="post">
   <input type="hidden" name=_method value="patch">

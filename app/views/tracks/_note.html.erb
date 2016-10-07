@@ -1,6 +1,6 @@
 <ul>
   <% @track.notes.each do |note| %>
-    <li> <%= note.author.email %> says:
+    <li> <strong><%= note.author.email %> says:</strong>
     <br>
     <br>
 
@@ -9,8 +9,10 @@
     <form class="" action= "<%= "#{note_url}" %>" method="post">
       <input type="hidden" name="delete_note[id]" value="<%=note.id %>">
     <%= button_to "Delete Note", note_url, method: :delete %>
+
     </form>
     <% end %>
   </li>
+  <br>
   <% end %>
 </ul>

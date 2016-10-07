@@ -54,7 +54,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   root to: 'sessions#new'
-  resources :users, only: [:create, :new, :show]
+  resources :users, only: [:create, :new, :show] do
+    collection do
+      get 'activate'
+    end
+  end
   resources :sessions, only: [:create, :new, :destroy]
   resources :bands
   resources :albums, except: [:index]
